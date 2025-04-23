@@ -7,39 +7,31 @@ function change(input) {
     const returnCoins = [];
     let newTotal = input;
     let coinType = 0;
-    console.log(newTotal)
 
-    const currentCoint = coins[coinType];
-    const needMoreChange = newTotal - currentCoint > 0
-    while(newTotal !== 0) {
-    // while(false) {
-        const currentCoint = coins[coinType];
-        const needMoreChange = newTotal - currentCoint > 0
-        // console.log(currentCoint)
-        console.log(newTotal)
+    while(newTotal > 0) {
+        const currentCoin = coins[coinType];
+        const changeCoin = newTotal - currentCoin < 0
 
         if (newTotal === 0) {
             break;
         }
-
-        if (needMoreChange) {
-            returnCoins.push(currentCoint);
-            newTotal =- currentCoint;
+        if (changeCoin) {
+            coinType += 1;
+            continue
         } else {
-            if (coinType === 2) {
+            if (coinType === 3) {
                 continue;
             }
-
-            coinType += 1;
-            continue;   
+            returnCoins.push(currentCoin);
+            newTotal = newTotal - currentCoin;
         }
     }
-
-    console.log(returnCoins, '<<< coins');
+    console.log(returnCoins);
     return returnCoins.length;
 }
 
-change(28);
+const result = change(28);
+console.log(result);
 
 
 
